@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import './App.css';
+import HatchNavBar from './components/HatchNavBar/HatchNavBar';
+import UserProfile from './components/UserProfile/UserProfile';
+import UserListing from './components/UserListing/UserListing';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container-fluid p-0">
+      <HatchNavBar></HatchNavBar>
+      <Router>
+        <div>
+          <Route exact path="/"> <Redirect to="/users" /> </Route>
+          <Route exact path="/users" component={UserListing} />
+          <Route path="/users/:id" component={UserProfile} />
+        </div>
+      </Router>
     </div>
   );
 }
